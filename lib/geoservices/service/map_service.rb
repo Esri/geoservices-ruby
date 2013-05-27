@@ -1,5 +1,5 @@
 module Geoservice
-  class FeatureService
+  class MapService
     include Geoservice::Base    
     include Geoservice::Layerable
     include Geoservice::Queryable

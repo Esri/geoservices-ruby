@@ -5,16 +5,20 @@ This library is a simple wrapper around the GeoServices API.
 
 ## Instructions
 
+```ruby
+@service = Geoservice::MapService.new(:url => "http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_weat/MapServer")
+@service.layers[0]["name"] #=> "Watches/Warnings"
+```
 
 ### Testing
 
 geoservices-ruby uses RSpec for tests. 
 
-    $ rspec
+    $ rake rspec
 
 ## Requirements
 
-* Ruby
+* Ruby 1.9.3
 
 ## Resources
 
