@@ -10,6 +10,8 @@ This library is a simple wrapper around the GeoServices API.
 @service.layers[0]["name"] #=> "Watches/Warnings"
 ```
 
+If calling to a secure service, include `:token => TOKEN` in the constructor.
+
 ### Testing
 
 geoservices-ruby uses RSpec for tests. 

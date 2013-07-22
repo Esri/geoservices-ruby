@@ -1,14 +1,14 @@
 module Geoservice
   class FeatureService
-    include Geoservice::Base    
+    include Geoservice::Base
     include Geoservice::Layerable
     include Geoservice::Queryable
     
-    attr_accessor :metadata, :url
     
     def initialize(options)
       # @layers = Layer.new(
       @url = options[:url]
+      @token = options.delete(:token)
       @metadata = get(@url)
     end
   end

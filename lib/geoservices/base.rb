@@ -2,6 +2,7 @@ require 'json'
 require 'net/http'
 module Geoservice
   module Base
+    attr_accessor :metadata, :url, :token
 
     def get(path,options={})
       path.gsub!(/%username%/,@username || "")
@@ -29,13 +30,13 @@ module Geoservice
       request = Net::HTTP::Post.new(uri.request_uri)
       params = {:f => "json", :token => @token}.merge(options)
       request.set_multipart_form_data(params)
-  
+
       res = http.request(request)
       if res.is_a?(Net::HTTPSuccess)
         return JSON.parse(res.body)
       else
         throw res.status
-      end   
+      end
     end
   end
 end
