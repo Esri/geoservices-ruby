@@ -5,15 +5,19 @@ module Geoservice
     attr_accessor :metadata, :url, :token
 
     def get(path,options={})
-      path.gsub!(/%username%/,@username || "")
-      uri = URI.parse(path)
-      uri.query = URI.encode_www_form({:f => "json", :token => @token || nil}.merge(options))
+      begin
+        path.gsub!(/%username%/,@username || "")
+        uri = URI.parse(path)
+        uri.query = URI.encode_www_form({:f => "json", :token => @token || nil}.merge(options))
 
-      res = Net::HTTP.get_response(uri)
-      if res.is_a?(Net::HTTPSuccess)
-        return JSON.parse(res.body)
-      else
-        throw res.status
+        res = Net::HTTP.get_response(uri)
+        if res.is_a?(Net::HTTPSuccess)
+          return JSON.parse(res.body)
+        else
+          throw res.status
+        end
+      rescue => e
+        throw "Error in GeoServices: #{e.message}"
       end
     end
     def post(path, options={})
