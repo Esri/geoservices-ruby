@@ -1,4 +1,4 @@
-module Geoservice
+  module Geoservice
   module Layerable
     def layers(layer_name = nil)
       @full_layers ||= get(@url + '/layers')["layers"]
@@ -12,7 +12,7 @@ module Geoservice
 
     def [](layer_name)
       if self.metadata['layers'].nil?
-        return self
+        return self.metadata
       elsif layer_name.kind_of?(Integer)
         return self.metadata.layers[layer_name]
       else
