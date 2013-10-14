@@ -1,4 +1,4 @@
-  module Geoservice
+module Geoservice
   module Layerable
     def layers(layer_name = nil)
       @full_layers ||= get(@url + '/layers')["layers"]
