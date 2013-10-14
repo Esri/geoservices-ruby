@@ -3,8 +3,8 @@ module Geoservice
     include Geoservice::Base
     include Geoservice::Layerable
     include Geoservice::Queryable
-    
-    
+
+
     def initialize(options)
       # @layers = Layer.new(
       @url = options[:url]

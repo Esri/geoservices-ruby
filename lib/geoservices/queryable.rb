@@ -1,6 +1,6 @@
 module Geoservice
   module Queryable
-    
+
     # Perform a query call for the Geoservice
     # returns nil if the layer does not have the Capability: Query
     def query(layer_idx=0, options={})
