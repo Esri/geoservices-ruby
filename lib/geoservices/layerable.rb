@@ -1,7 +1,9 @@
 module Geoservice
   module Layerable
+    # Returns an array combining (spatial) Layers and Tables
     def layers(layer_name = nil)
-      @full_layers ||= get(@url + '/layers')["layers"]
+      @service_layers ||= get(@url + '/layers')
+      @full_layers = @service_layers["layers"] + @service_layers["tables"]
 
       return @full_layers if layer_name.nil?
 
