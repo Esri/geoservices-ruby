@@ -16,7 +16,7 @@ module Geoservice
       if self.metadata['layers'].nil?
         return self.metadata
       elsif layer_name.kind_of?(Integer)
-        return self.metadata.layers[layer_name]
+        return get("#{@url}/#{layer_name}")
       else
         return self.layers(layer_name)
       end
