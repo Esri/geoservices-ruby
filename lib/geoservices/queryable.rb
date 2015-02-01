@@ -7,7 +7,7 @@ module Geoservice
       return nil unless self.metadata["capabilities"] =~ /Query/
       options[:where] ||= "1=1"
       options[:outFields] ||= "*"
-      get("#{@url}/#{layer_idx}/query", options)
+      post("#{@url}/#{layer_idx}/query", options)
     end
 
     # Returns the number of features expected from a query call for the Geoservice
