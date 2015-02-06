@@ -8,7 +8,10 @@ module Geoservice
       begin
         path.gsub!(/%username%/,@username || "")
         uri = URI.parse(path)
-        uri.query = URI.encode_www_form({:f => "json", :token => @token || nil}.merge(options))
+        params = {:f => "json"}.merge(options)
+        params.merge(:token => @token) unless @token.nil? or @token.length == 0
+
+        uri.query = URI.encode_www_form(params)
 
         res = Net::HTTP.get_response(uri)
         if res.is_a?(Net::HTTPSuccess)
@@ -23,7 +26,7 @@ module Geoservice
     def post(path, options={})
       secure = options.delete(:secure) || false
       path.gsub!(/%username%/,@username || "")
-      uri = URI.parse(path)
+      uri = URI.parse(@host + path)
       http = Net::HTTP.new(uri.host, secure ? 443 : uri.port)
       if(secure)
         http.use_ssl = true
@@ -32,8 +35,9 @@ module Geoservice
       end
 
       request = Net::HTTP::Post.new(uri.request_uri)
-      params = {:f => "json", :token => @token}.merge(options)
-      request.body = URI.encode_www_form(params)
+      params = {:f => "json"}.merge(options)
+      params.merge(:token => @token) unless @token.nil? or @token.length == 0
+      request.set_multipart_form_data(params)
 
       res = http.request(request)
       if res.is_a?(Net::HTTPSuccess)
