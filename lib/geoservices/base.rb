@@ -26,7 +26,7 @@ module Geoservice
     def post(path, options={})
       secure = options.delete(:secure) || false
       path.gsub!(/%username%/,@username || "")
-      uri = URI.parse(@host + path)
+      uri = URI.parse(path)
       http = Net::HTTP.new(uri.host, secure ? 443 : uri.port)
       if(secure)
         http.use_ssl = true
