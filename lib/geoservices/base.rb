@@ -37,7 +37,7 @@ module Geoservice
       request = Net::HTTP::Post.new(uri.request_uri)
       params = {:f => "json"}.merge(options)
       params.merge(:token => @token) unless @token.nil? or @token.length == 0
-      request.set_multipart_form_data(params)
+      request.body = URI.encode_www_form(params)
 
       res = http.request(request)
       if res.is_a?(Net::HTTPSuccess)
