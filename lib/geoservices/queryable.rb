@@ -18,7 +18,8 @@ module Geoservice
       unless self.metadata['currentVersion'].nil?
         query(layer_idx, options.merge(:returnCountOnly => true))
       else
-        # Return count only is not supported by versions lower than 10.1
+        # Neither returnCountOnly nor currentVersion are supported for layers @ lower than 10.0 SP1 
+        # http://resources.arcgis.com/en/help/rest/apiref/
         # So request all the object ids and count them up
         response = query(layer_idx, options.merge(:where => '1=1', :returnIdsOnly => true))
         return {'count' => response['objectIds'].length}
