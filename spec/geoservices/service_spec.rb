@@ -40,4 +40,14 @@ describe Geoservice do
       expect(@service.layers("Watches/Warnings")['name']).to eq("Watches/Warnings")
     end
   end
+
+  context "getting a map service layer at version 10.0" do
+    before :all do
+      @service = Geoservice::MapService.new(:url => "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Earthquakes/EarthquakesFromLastSevenDays/MapServer")
+    end
+
+    it "should be countable" do
+      expect(@service.count(0)["count"] > 0).to eq(true)
+    end
+  end
 end
